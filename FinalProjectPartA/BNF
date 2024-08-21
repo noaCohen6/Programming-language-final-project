@@ -1,0 +1,50 @@
+<program> ::= <statement>+
+
+<statement> ::= <function-definition> | <expression>
+
+<function-definition> ::= "DEFUN" <identifier> "(" <parameter-list> ")" ":" <expression>
+
+<parameter-list> ::= <identifier> ("," <identifier>)*
+
+<expression> ::= <if-expression>
+               | <for-expression>
+               | <lambda-expression>
+               | <binary-operation>
+               | <unary-operation>
+               | <function-call>
+               | <primary>
+
+<if-expression> ::= "IF" <expression> "THEN" <expression>
+                    ("ELSEIF" <expression> "THEN" <expression>)*
+                    ["ELSE" <expression>]
+
+<for-expression> ::= "FOR" <expression> "TO" <expression> ["STEP" <expression>] "DO" <expression>
+
+<lambda-expression> ::= "LAMBDA" <parameter-list> ":" <expression>
+
+<binary-operation> ::= <expression> <binary-operator> <expression>
+
+<binary-operator> ::= "+" | "-" | "*" | "/" | "%" | "==" | "!=" | ">" | "<" | ">=" | "<=" | "AND" | "OR"
+
+<unary-operation> ::= <unary-operator> <expression>
+
+<unary-operator> ::= "+" | "-" | "NOT"
+
+<function-call> ::= <identifier> "(" <argument-list> ")"
+
+<argument-list> ::= [<expression> ("," <expression>)*]
+
+<primary> ::= <number>
+            | <boolean>
+            | <identifier>
+            | "(" <expression> ")"
+
+<number> ::= <digit>+
+
+<boolean> ::= "TRUE" | "FALSE"
+
+<identifier> ::= <letter> (<letter> | <digit>)*
+
+<letter> ::= "a" | "b" | ... | "z" | "A" | "B" | ... | "Z"
+
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
