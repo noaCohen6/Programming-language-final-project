@@ -23,8 +23,8 @@ print("question 4")
 cumulative_op = lambda op: lambda seq: seq[0] if len(seq) == 1 else op(seq[0], cumulative_op(op)(seq[1:]))
 factorial = lambda n: cumulative_op(lambda x, y: x * y)(list(range(1, n + 1)))
 exponentiation = lambda base, exp: cumulative_op(lambda x, y: x * y)([base] * exp)
-print(factorial(5))  #הפונקציה עושה עצרת
-print(exponentiation(2, 3))  #הפונקציה עושה 2 בחזקת 3
+print(factorial(5))  
+print(exponentiation(2, 3))  
 print("----------------------------------------------------------")
 
 #q5
