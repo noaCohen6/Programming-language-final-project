@@ -116,7 +116,6 @@ T_IF = 'T_IF'
 T_THEN = 'T_THEN'
 T_ELSE = 'T_ELSE'
 T_ELSEIF = 'T_ELSEIF'
-T_WHILE = 'T_WHILE'
 T_FOR = 'T_FOR'
 T_TO = 'T_TO'
 T_STEP = 'T_STEP'
@@ -317,8 +316,6 @@ class my_Lexer:
             return my_Token(T_ELSE, pos_start=pos_start)
         elif id_str_lower == 'elseif':
             return my_Token(T_ELSEIF, pos_start=pos_start)
-        elif id_str_lower == 'while':
-            return my_Token(T_WHILE, pos_start=pos_start)
         elif id_str_lower == 'for':
             return my_Token(T_FOR, pos_start=pos_start)
         elif id_str_lower == 'to':
@@ -418,15 +415,6 @@ class IfNode:
 
     def __repr__(self):
         return f'IfNode(cases={self.cases}, else_case={self.else_case})'
-
-
-class WhileNode:
-    def __init__(self, condition_node, body_node):
-        self.condition_node = condition_node
-        self.body_node = body_node
-
-    def __repr__(self):
-        return f'WhileNode(condition={self.condition_node}, body={self.body_node})'
 
 
 class ForNode:
@@ -1174,14 +1162,7 @@ class Interpreter:
 
         return res.success(None)
 
-    def visit_WhileNode(self, node):
-        res = RTResult()
-        while res.register(self.visit(node.condition_node)):
-            if res.error: return res
-            res.register(self.visit(node.body_node))
-            if res.error: return res
-        return res.success(None)
-
+    
     def visit_ForNode(self, node):
         res = RTResult()
 
